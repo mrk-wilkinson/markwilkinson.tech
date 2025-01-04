@@ -4,10 +4,22 @@
         <loc>https://markwilkinson.tech/</loc>
     </url>
     <url>
-        <loc>https://markwilkinson.tech/blog/</loc>
+        <loc>https://markwilkinson.tech/about/</loc>
     </url>
     <url>
-        <loc>https://markwilkinson.tech/blog/first/</loc>
-        <lastmod>2025-01-04</lastmod>
+        <loc>https://markwilkinson.tech/posts/</loc>
+    </url>
+    <url>
+        <loc>https://markwilkinson.tech/posts/20240104/</loc>
+        <lastmod>2024-01-04</lastmod>
+    </url>
+    <url>
+        <loc>https://markwilkinson.tech/tags/</loc>
+    </url>
+    <url>
+        <loc>https://markwilkinson.tech/tags/general/</loc>
+    </url>
+    <url>
+        <loc>https://markwilkinson.tech/tags/self/</loc>
     </url>
 </urlset>
