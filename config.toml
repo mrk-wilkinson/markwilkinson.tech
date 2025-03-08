@@ -33,7 +33,7 @@ hermit_menu = [
 
 hermit_social = [
     { name = "mastodon", link = "https://infosec.exchange/@markwilk" },
-    { name = "linkedin", link = "https://www.linkedin.com/in/mark-wilkinson-6398a7312/" },
+    { name = "linkedin", link = "https://www.linkedin.com/in/mrk-wilkinson/" },
     { name = "github", link = "https://github.com/mrk-wilkinson" },
     { name = "email", link = "mailto:mrk.wilkinson@protonmail.com" }
 ]
