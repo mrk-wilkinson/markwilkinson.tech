@@ -20,7 +20,7 @@
   />
   <link rel="stylesheet" href="https://markwilkinson.tech/style.css"/>
   
-  <title>Making The Blog</title>
+  <title>Eavesdropper</title>
   
 
   
@@ -117,7 +117,7 @@
 	<header class="post-header">
 	  <div class="post-meta">
 		
-		<span>Jan 04, 2025</span>
+		<span>Feb 04, 2026</span>
 		<small> - 
 <span class="reading-time" title="Estimated read time">
   
@@ -128,41 +128,69 @@
 		
             
 	  </div>
-	  <h1>Making The Blog</h1>
+	  <h1>Eavesdropper</h1>
 	</header>
 
 	<div class="content">
         
-	  <h2 id="tldr">TLDR;</h2>
-<ul>
-<li>Zola: Static site generator using MD and Tera</li>
-<li>hermit_zola: Simple theme</li>
-<li>Github: Hosting and deployment</li>
-</ul>
-<h2 id="zola">Zola</h2>
-<p>Zola is a static site generator (converts MD to html) that runs in entirely in one binary. All it took to set up was</p>
-<pre><code data-lang="bash">$&gt; git init
-$&gt; zola init
+	  <h2 id="medium-level-challenge-tryhackme-room">Medium level challenge tryhackme room</h2>
+<p><strong>Context</strong>
+You've uncovered a user's (Frank) SSH private key and broken into a target environment. You have access as Frank but need to obtain root access.</p>
+<p>My thoughts: Appears to be a straightforward linux privilege escalation challenge.</p>
+<p><strong>Initial steps</strong>
+First I adjusted permissions on the SSH key to make it usable and then connected in.</p>
+<pre><code>chmod 600 (key_name)
+ssh -i (key_name) frank@TARGET_IP
 </code></pre>
-<h2 id="hermit-zola">Hermit_zola</h2>
-<p>I followed the instructions <a href="https://www.getzola.org/themes/hermit/">here</a> and it looked great. I did have to add a section to my <em>config.toml</em> for the tags</p>
-<pre><code data-lang="toml">taxonomies = [
-           {name = &quot;tags&quot;, rss = true}
-]
-
+<p>Once I gained access as Frank I ran <code>id</code> and saw he was part of the sudo group.  Which normally would be helpful but without his password won't do much in this situation.
+Unfortunately the sudoers file cannot be read, but standard practice would be
+anyone in the sudo group can use sudo on any command, with password.</p>
+<p>I ran <code>ps aux</code> to see if there was anything interesting running and it was the opposite.  Nothing.
+So I decided it was time for old reliable, LinPEAS.</p>
+<p><strong>LinPEAS</strong></p>
+<pre><code>scp linpeas.sh frank@TARGET_IP:/tmp/peas.sh
 </code></pre>
-<h2 id="deploying-through-github-pages">Deploying through github pages</h2>
-<p>I used github pages to host it since I didn't require any dynmaic components or full hosting. To configure automatic deployment I used github actions to serve the /public/ directory, which is the location zola stores "compiled" websites.</p>
-<h2 id="my-plan-for-this-blog">My plan for this blog</h2>
-<p>I plan to upload some walkthroughs for tryhackme and hackthebox on here, aswell as some more original content related to information security (malware analysis on random samples I find, etc).  However, the odds this stays entirely infosec related are almost zero.</p>
+<p>A quick scp lets us transfer the script onto the box.  After running the script and doing some general poking around, we aren't always the only ssh session.
+Occasionally there is another ssh connection, and if we can eavesdrop on it, we might be able to get the password.</p>
+<pre><code>watch -n 1 ps aux
+</code></pre>
+<p><img src="../../assets/eavesdropper1.png" alt="Image of ps aux cmd" /></p>
+<p><strong>Sniffing SSH</strong></p>
+<p>I found this great article online talking about the process.
+[https://networklogician.com/2021/04/17/sniffing-ssh-passwords/]
+Now unfortunately that method requires root access, something we lack.</p>
+<p>However, the article below gave me another method.  Changing the user profile to log a session.
+[https://www.infosecmatter.com/ssh-sniffing-ssh-spying-methods-and-defense/]</p>
+<p>That idea also failed, I ran <code>watch -n 1 ps aux</code> and saw the sessions were short, notty sessions so my profile trick would do nothing.</p>
+<p>Unfortunately, sniffing the ssh connection doesn't seem like it will work.</p>
+<p>We need to find out what is happening in these frequent, short connections.</p>
+<p><strong>pspy</strong></p>
+<p>Pssss.  Its time to spy.
+[https://github.com/DominicBreuker/pspy]</p>
+<p>Just running pspy should give you what you need, specifically, the command being automated</p>
+<pre><code>sudo cat /etc/shadow
+</code></pre>
+<p>Definitely a strange command to be automated, but whatever.</p>
+<p>One of the main attack vectors of automated commands (like this, cronjobs, etc) is path.
+If we can overwrite the path for the frank user (hey thats us!) we can change the binary it runs.</p>
+<p>If we replace sudo with a script of our own, to say, get an input and write it to a text file.  We could get Frank's password.</p>
+<p><strong>Sudo Hijacking</strong></p>
+<p>First, we need to create our own sudo executable.</p>
+<p>A bash script with the name sudo in the temp directory we make executable will work.</p>
+<p><img src="../../assets/eavesdropper2.png" alt="bash script to mimic sudo" /></p>
+<p>Now, we can add this line to the top of the bashrc to make the automation run our sudo before the real one.</p>
+<pre><code>PATH=&quot;/tmp:$PATH&quot;
+</code></pre>
+<p>And after a little bit of waiting, the automation runs our sudo file.  If we check in the /tmp folder we find the file with the password.  This lets us sudo into the root user and read the flag!</p>
+<p><img src="../../assets/eavesdropper3.png" alt="Terminal showing flag and successful sudo su cmd" /></p>
 
 	</div>
 	<hr class="post-end">
 	<footer class="post-info">
     
-    <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>159 Words</p>
+    <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>512 Words</p>
     
-    <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2025-01-04</p>
+    <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2026-02-04</p>
     
 	</footer>
   </article>
