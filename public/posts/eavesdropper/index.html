@@ -148,7 +148,7 @@ anyone in the sudo group can use sudo on any command, with password.</p>
 <p>I ran <code>ps aux</code> to see if there was anything interesting running and it was the opposite.  Nothing.
 So I decided it was time for old reliable, LinPEAS.</p>
 <p><strong>LinPEAS</strong></p>
-<pre><code>scp linpeas.sh frank@TARGET_IP:/tmp/peas.sh
+<pre><code>scp linpeas.sh frank@TARGET_IP:&#x2F;tmp&#x2F;peas.sh
 </code></pre>
 <p>A quick scp lets us transfer the script onto the box.  After running the script and doing some general poking around, we aren't always the only ssh session.
 Occasionally there is another ssh connection, and if we can eavesdrop on it, we might be able to get the password.</p>
@@ -168,7 +168,7 @@ Now unfortunately that method requires root access, something we lack.</p>
 <p>Pssss.  Its time to spy.
 [https://github.com/DominicBreuker/pspy]</p>
 <p>Just running pspy should give you what you need, specifically, the command being automated</p>
-<pre><code>sudo cat /etc/shadow
+<pre><code>sudo cat &#x2F;etc&#x2F;shadow
 </code></pre>
 <p>Definitely a strange command to be automated, but whatever.</p>
 <p>One of the main attack vectors of automated commands (like this, cronjobs, etc) is path.
@@ -179,7 +179,7 @@ If we can overwrite the path for the frank user (hey thats us!) we can change th
 <p>A bash script with the name sudo in the temp directory we make executable will work.</p>
 <p><img src="../../assets/eavesdropper2.png" alt="bash script to mimic sudo" /></p>
 <p>Now, we can add this line to the top of the bashrc to make the automation run our sudo before the real one.</p>
-<pre><code>PATH=&quot;/tmp:$PATH&quot;
+<pre><code>PATH=&quot;&#x2F;tmp:$PATH&quot;
 </code></pre>
 <p>And after a little bit of waiting, the automation runs our sudo file.  If we check in the /tmp folder we find the file with the password.  This lets us sudo into the root user and read the flag!</p>
 <p><img src="../../assets/eavesdropper3.png" alt="Terminal showing flag and successful sudo su cmd" /></p>

