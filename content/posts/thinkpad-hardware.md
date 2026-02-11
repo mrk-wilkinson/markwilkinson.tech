@@ -29,6 +29,12 @@ tags = ["Thinkpad", "Laptop", "Setup"]
 
 SSD install into the existing and empty WWAN (Cellular modem) slot
 
+If you plan on doing this mod yourself, make sure to select a compatible SSD.  SSDs to fit in the modem slot and work need to be:
+
+* B keyed, or M+B key
+* PCIe, NOT SATA or anything else
+* M.2 2242
+
 1. First we have to take out the external battery.  Its secured by two slide locks.
 2. Next, we have to unscrew the captive screws from the backplate
 3. After you can shim the back cover off.  There are clips so go slowly around and pop them up.
