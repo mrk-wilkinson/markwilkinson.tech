@@ -46,6 +46,11 @@ If you plan on doing this mod yourself, make sure to select a compatible SSD.  S
 9. Put back in the external battery
 
 
+New external battery
+
+The external battery that came with my thinkpad was toast so I had to get a new one.  I decided to pick up a 01AV427 72Wh battery for around $35 online.  It is the biggest external battery offered for the laptop and does add a lift.  The lift hasn't bothered me so  far and seems pretty stable.  The battery life has been great with it
+
+
 **Result**
 
 Now I have a laptop that has been reunited with a storage medium.  OS install and setup are in the next posts.
